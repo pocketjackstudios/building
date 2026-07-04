@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Location-based AR-jjsantos demo</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <!-- Atualizando A-Frame para uma versão mais recente -->
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <!-- Usando a versão correta do AR.js para Location-Based AR -->
+    <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar-threex-location-only.js'></script>
+    <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'></script>
 </head>
 
 <body style="margin: 0; overflow: hidden;">
-    <a-scene vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+    <!-- Adicionando renderer='antialias: true; alpha: true' para melhor renderização -->
+    <a-scene vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;" renderer="antialias: true; alpha: true">
         <a-asset-item id="model"
             src="https://raw.githubusercontent.com/pocketjackstudios/building/refs/heads/main/assets/models/building.gltf"></a-asset-item>
+        
+        <!-- Corrigindo o formato das coordenadas e usando gps-new-entity-place -->
         <a-gltf-model rotation="0 0 0" position="0 0 0.1" scale="0.5 0.5 0.5" src="#model"
-            gps-entity-place="latitude: <-19.974832>; longitude: <-44.213416>;"></a-gltf-model>
+            gps-new-entity-place="latitude: -19.974832; longitude: -44.213416"></a-gltf-model>
 
-        <a-camera gps-camera rotation-reader> </a-camera>
+        <!-- Usando gps-new-camera -->
+        <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
     </a-scene>
 </body>
-
 </html>
